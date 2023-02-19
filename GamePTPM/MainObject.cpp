@@ -160,6 +160,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* screen)
 			input_type_.left_ = 0;
 		}
 		break;
+		//new
 		case SDLK_w:
 			input_type_.jump_ = 0;
 			break;
