@@ -1,7 +1,9 @@
 #pragma once
 
+#include <vector>
 #include "CommonFunc.h";
 #include "BaseObject.h";
+#include "BulletObject.h"
 
 #define GRAVITY_SPEED 0.4
 #define MAX_FAIL_SPEED 10
@@ -23,6 +25,7 @@ public:
 	bool LoadImg(std::string path, SDL_Renderer* screen);
 	void Show(SDL_Renderer* des);
 	void HandleInputAction(SDL_Event events, SDL_Renderer* screen);
+	void HandleBullet(SDL_Renderer* des);
 	void set_clip();
 
 	void DoPlayer(Map& map_data);
@@ -35,7 +38,16 @@ public:
 	void CenterEnityOnMap(Map& map_data);
 	void UpDateImagePlayer(SDL_Renderer* des);
 
+	void set_bullet_list(std::vector<BulletObject*> bullet_list)
+	{
+		p_bullet_list = bullet_list;
+	}
+	std::vector<BulletObject*> get_bullet_list() const { return p_bullet_list; }
+
+
 private:
+	std::vector<BulletObject*> p_bullet_list;
+
 	float x_val_;// khi bam di chuyen 1 doan bang x_val
 	float y_val_;
 

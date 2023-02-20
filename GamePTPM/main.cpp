@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 	game_map.LoadTiles(g_screen);
 
 	MainObject p_player;
-	p_player.LoadImg("img//run_right.png", g_screen);
+	p_player.LoadImg("img//player_right.png", g_screen);
 	p_player.set_clip();
 
 
@@ -95,6 +95,7 @@ int main(int argc, char* argv[])
 
 		Map map_data = game_map.getMap();
 
+		p_player.HandleBullet(g_screen);
 		p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
 		p_player.DoPlayer(map_data);
 		p_player.Show(g_screen);
