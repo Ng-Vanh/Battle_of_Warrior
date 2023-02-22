@@ -1,13 +1,15 @@
 #ifndef COMMON_FUNCTION_H_
 #define COMMON_FUNCTION_H_
 
+#include<iostream>
 #include<Windows.h>
 #include<string>
+#include<vector>
 #include<SDL_image.h>
 #include<SDL.h>
 #include<SDL_mixer.h>
 #include<SDL_ttf.h>
-#include<iostream>
+
 
 static SDL_Window* g_Window = NULL;
 static SDL_Renderer* g_screen = NULL;
@@ -22,13 +24,14 @@ const int COLOR_KEY_R = 167;
 const int COLOR_KEY_G = 175;
 const int COLOR_KEY_B = 180;
 const int RENDER_DRAW_COLOR = 0xff;
-const int FPS = 40;
+const int FPS = 50;
 
 
 #define TILE_SIZE  64
 #define BLANK_TILE 0
 #define MAX_MAP_X  400
 #define MAX_MAP_Y  10
+#define STATE_MONEY 4
 
 typedef struct Input
 {

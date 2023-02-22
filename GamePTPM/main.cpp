@@ -1,9 +1,10 @@
-#include"SDL.h"
-#include"BaseObject.h"
+#include "SDL.h"
+#include "BaseObject.h"
 #include "CommonFunc.h"
-#include"GameMap.h"
-#include"MainObject.h"
-#include"ImpTimer.h"
+#include "GameMap.h"
+#include "MainObject.h"
+#include "ImpTimer.h"
+#include "ThreatObject.h"
 BaseObject g_background;
 
 void close()
@@ -51,7 +52,56 @@ bool LoadBackGround()
 		return false;
 	return true;
 }
+std::vector<ThreatObject*> MakeThreatList()
+{
+	std::vector<ThreatObject*> list_threats;// static threat
 
+
+	ThreatObject* dynamic_threats = new ThreatObject[20];
+	for (int i = 0; i < 20; i++)
+	{
+		ThreatObject* p_threat = (dynamic_threats + i);
+		if (p_threat != NULL)
+		{
+			p_threat->LoadImg("img//threat_left.png", g_screen);
+			p_threat->set_clips();
+			p_threat->set_type_move_(ThreatObject::MOVE_IN_SPACE_THREAT);// trang thai threat: di chuyen
+			p_threat->set_x_pos(550 + i * 1250);
+			p_threat->set_y_pos(399);
+
+			int pos1 = p_threat->get_x_pos() - 60;
+			int pos2 = p_threat->get_x_pos() + 60;
+			p_threat->setAnimationPos(pos1, pos2);// di chuyen trong pham vi pos1-->pos2
+			p_threat->set_input_left(1);
+
+
+			list_threats.push_back(p_threat);
+		}
+	}
+
+	ThreatObject* threats_objs = new ThreatObject[20];
+	for (int i = 0; i < 20; i++)
+	{
+		ThreatObject* p_threat = (threats_objs + i);
+		if (p_threat != NULL)
+		{
+			p_threat->LoadImg("img//threat_level.png", g_screen);
+			p_threat->set_clips();
+			p_threat->set_x_pos(750 + i * 1200);
+			p_threat->set_y_pos(250);
+			p_threat->set_type_move_(ThreatObject::STATIC_THREAT);
+			p_threat->set_input_left(0);
+			//Threat ban dan: 
+			BulletObject* p_bullet = new BulletObject;
+			p_threat->InitBullet(p_bullet, g_screen);
+
+			list_threats.push_back(p_threat);
+		}
+	}
+	return list_threats;
+}
+
+#undef main 
 int main(int argc, char* argv[])
 {
 	ImpTimer fps_timer;
@@ -69,9 +119,10 @@ int main(int argc, char* argv[])
 	game_map.LoadTiles(g_screen);
 
 	MainObject p_player;
-	p_player.LoadImg("img//player_right.png", g_screen);
+	p_player.LoadImg("img//goku_right.png", g_screen);
 	p_player.set_clip();
 
+	std::vector<ThreatObject*> threats_list = MakeThreatList();
 
 
 	bool is_quit = false;
@@ -84,8 +135,6 @@ int main(int argc, char* argv[])
 			{
 				is_quit = true;
 			}
-
-
 			p_player.HandleInputAction(g_event, g_screen);
 		}
 		SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
@@ -95,13 +144,30 @@ int main(int argc, char* argv[])
 
 		Map map_data = game_map.getMap();
 
+		// Player
 		p_player.HandleBullet(g_screen);
 		p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
 		p_player.DoPlayer(map_data);
 		p_player.Show(g_screen);
 
+		//Map
 		game_map.setMap(map_data);
 		game_map.DrawMap(g_screen);
+
+		//Threat
+		for (int i = 0; i < threats_list.size(); i++)
+		{
+			ThreatObject* p_threat = threats_list.at(i);
+			if (p_threat != NULL)
+			{
+				p_threat->SetMapXY(map_data.start_x_, map_data.start_y_);
+				p_threat->ImpMoveType(g_screen);
+				p_threat->DoPlayer(map_data);
+				p_threat->MakeBullet(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT);
+				p_threat->Show(g_screen);
+			}
+		}
+
 
 		SDL_RenderPresent(g_screen);
 
@@ -114,9 +180,19 @@ int main(int argc, char* argv[])
 			{
 				SDL_Delay(delay_time);
 			}
-			std::cout << FPS << std::endl;
 		}
 	}
+	for (int i = 0; i < threats_list.size(); i++)
+	{
+		ThreatObject* p_threat = threats_list.at(i);
+		if (p_threat != NULL)
+		{
+			p_threat->Free();
+			p_threat = NULL;
+		}
+	}
+	threats_list.clear();
+
 	close();
 	return 0;
 }

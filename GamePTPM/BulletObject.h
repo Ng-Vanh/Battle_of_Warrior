@@ -39,7 +39,7 @@ public:
 	unsigned int get_bullet_type() const { return bullet_type_; }
 
 	void HandleMove(const int& x_boder, const int& y_boder);// khi dan ban vuot qua man hien thi thi no xoa vien dan
-	void LoadImgBullet(SDL_Renderer* des);
+	bool LoadImgBullet(SDL_Renderer* des);
 private:
 	int x_val_;
 	int y_val_;

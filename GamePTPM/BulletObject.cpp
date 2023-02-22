@@ -12,16 +12,18 @@ BulletObject::~BulletObject()
 {
 
 }
-void BulletObject::LoadImgBullet(SDL_Renderer* des)
+bool BulletObject::LoadImgBullet(SDL_Renderer* des)
 {
+	bool ret = false;
 	if (bullet_type_ == LAZE_BULLET)
 	{
-		LoadImg("img//laze_bullet.png", des);
+		ret = LoadImg("img//laze_bullet.png", des);
 	}
 	else if (bullet_type_ == SPHERE_BULLET)
 	{
-		LoadImg("img//sphere_bullet.png", des);
+		ret = LoadImg("img//sphere_bullet.png", des);
 	}
+	return ret;
 }
 void BulletObject::HandleMove(const int& x_boder, const int& y_boder)
 {

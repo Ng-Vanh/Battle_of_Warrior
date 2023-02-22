@@ -7,7 +7,7 @@
 
 #define GRAVITY_SPEED 0.4
 #define MAX_FAIL_SPEED 10
-#define PLAYER_SPEED 6
+#define PLAYER_SPEED 9
 #define PLAYER_JUMP_VALUE 15
 
 class MainObject :public BaseObject
@@ -43,9 +43,10 @@ public:
 		p_bullet_list = bullet_list;
 	}
 	std::vector<BulletObject*> get_bullet_list() const { return p_bullet_list; }
-
+	void InCreaseMoney();
 
 private:
+	int money_count;
 	std::vector<BulletObject*> p_bullet_list;
 
 	float x_val_;// khi bam di chuyen 1 doan bang x_val

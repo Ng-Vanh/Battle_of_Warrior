@@ -20,6 +20,8 @@ MainObject::MainObject()
 	map_y_ = 0;
 	int come_back_time = 0;
 
+	money_count = 0;
+
 }
 
 MainObject::~MainObject()
@@ -176,7 +178,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* screen)
 		else if (events.button.button == SDL_BUTTON_LEFT)
 		{
 			BulletObject* p_bullet = new BulletObject();
-			p_bullet->set_bullet_type(BulletObject::LAZE_BULLET);
+			p_bullet->set_bullet_type(BulletObject::SPHERE_BULLET);
 			p_bullet->LoadImgBullet(screen);
 
 			if (status_ == WALK_LEFT)
@@ -323,12 +325,12 @@ void MainObject::CheckToMap(Map& map_data)
 
 	/*
 
-	(x1,y1)---------(x2,y1)
+	(x1,y1)---------(x2,y1) = val1
 	  I					I
 	  I					I
 	  I					I
 	  I					I
-	 (x1,y2)--------(x2,y2)
+	 (x1,y2)--------(x2,y2) = val2
 
 
 	*/
@@ -337,19 +339,44 @@ void MainObject::CheckToMap(Map& map_data)
 	{
 		if (x_val_ > 0)// doi tuong dang di chuyen sang phai
 		{
-			if (map_data.tile[y1][x2] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
+			int val1 = map_data.tile[y1][x2];
+			int val2 = map_data.tile[y2][x2];
+
+			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				x_pos_ = x2 * TILE_SIZE;
-				x_pos_ -= width_frame_ + 1;
-				x_val_ = 0;
+				map_data.tile[y1][x2] = BLANK_TILE;
+				map_data.tile[y2][x2] = BLANK_TILE;
+				InCreaseMoney();
+			}
+			else
+			{
+				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
+				{
+					x_pos_ = x2 * TILE_SIZE;
+					x_pos_ -= width_frame_ + 1;
+					x_val_ = 0;
+				}
 			}
 		}
 		else if (x_val_ < 0)
 		{
-			if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y2][x1] != BLANK_TILE)
+
+			int val1 = map_data.tile[y1][x1];
+			int val2 = map_data.tile[y2][x1];
+
+			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				x_pos_ = (x1 + 1) * TILE_SIZE;
-				x_val_ = 0;
+				map_data.tile[y1][x1] = BLANK_TILE;
+				map_data.tile[y2][x1] = BLANK_TILE;
+				InCreaseMoney();
+			}
+			else
+			{
+				if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y2][x1] != BLANK_TILE)
+				{
+					x_pos_ = (x1 + 1) * TILE_SIZE;
+					x_val_ = 0;
+				}
 			}
 		}
 
@@ -368,25 +395,49 @@ void MainObject::CheckToMap(Map& map_data)
 	{
 		if (y_val_ > 0)
 		{
-			if (map_data.tile[y2][x1] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
-			{
-				y_pos_ = y2 * TILE_SIZE;
-				y_pos_ -= (height_frame_ + 1);
-				y_val_ = 0;
+			int val1 = map_data.tile[y2][x1];
+			int val2 = map_data.tile[y2][x2];
 
-				on_ground_ = true;
-				if (status_ == WALK_NONE)
+			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
+			{
+				map_data.tile[y2][x1] = BLANK_TILE;
+				map_data.tile[y2][x2] = BLANK_TILE;
+				InCreaseMoney();
+			}
+			else
+			{
+				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
 				{
-					status_ = WALK_RIGHT;
+					y_pos_ = y2 * TILE_SIZE;
+					y_pos_ -= (height_frame_ + 1);
+					y_val_ = 0;
+
+					on_ground_ = true;
+					if (status_ == WALK_NONE)
+					{
+						status_ = WALK_RIGHT;
+					}
 				}
 			}
 		}
 		else if (y_val_ < 0)
 		{
-			if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
+			int val1 = map_data.tile[y1][x1];
+			int val2 = map_data.tile[y1][x2];
+
+			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				y_pos_ = (y1 + 1) * TILE_SIZE;
-				y_val_ = 0;
+				map_data.tile[y1][x1] = BLANK_TILE;
+				map_data.tile[y1][x2] = BLANK_TILE;
+				InCreaseMoney();
+			}
+			else
+			{
+				if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y1][x2] != BLANK_TILE)
+				{
+					y_pos_ = (y1 + 1) * TILE_SIZE;
+					y_val_ = 0;
+				}
 			}
 
 		}
@@ -414,22 +465,28 @@ void MainObject::UpDateImagePlayer(SDL_Renderer* des)
 	{
 		if (status_ == WALK_LEFT)
 		{
-			LoadImg("img//player_left.png", des);
+			LoadImg("img//goku_left.png", des);
 		}
 		else if (status_ == WALK_RIGHT)
 		{
-			LoadImg("img//player_right.png", des);
+			LoadImg("img//goku_right.png", des);
 		}
 	}
 	else
 	{
 		if (status_ == WALK_LEFT)
 		{
-			LoadImg("img//jum_left.png", des);
+			LoadImg("img//fly_left.png", des);
 		}
 		else if (status_ == WALK_RIGHT)
 		{
-			LoadImg("img//jum_right.png", des);
+			LoadImg("img//fly_right.png", des);
 		}
 	}
+}
+void MainObject::InCreaseMoney()
+{
+	money_count++;
+	std::cout << "YOUR POINT: " << money_count << std::endl;
+
 }

@@ -1,35 +1,67 @@
-﻿  BulletObject.cpp
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(40,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(55,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+﻿  BaseObject.cpp
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(43,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(58,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  BulletObject.cpp
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(43,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(58,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  GameMap.cpp
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(43,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(58,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  ImpTimer.cpp
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(43,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(58,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
   MainObject.cpp
 C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(40,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(55,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(43,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(58,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
 C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(108,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(109,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(185,46): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(191,66): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(235,26): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(287,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(296,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(318,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(319,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(321,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(322,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(342,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(351,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(361,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(362,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(364,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(365,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(373,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(388,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(403,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(110,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(111,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(187,46): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(193,66): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(237,26): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(289,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(298,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(320,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(321,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(323,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(324,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(355,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(377,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(388,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(389,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(391,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(392,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(411,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(438,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.cpp(454,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  ThreatObject.cpp
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(43,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(58,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(82,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(83,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(100,33): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(154,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(155,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(157,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(158,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(182,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(198,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(209,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(210,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(212,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(213,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(224,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(241,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\ThreatObject.cpp(257,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   main.cpp
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(40,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(55,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(43,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(58,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
 C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(69,28): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(72,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(73,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(90,28): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
   Generating Code...
   GamePTPM.vcxproj -> C:\Users\ユーザー\source\repos\GamePTPM\x64\Debug\GamePTPM.exe
