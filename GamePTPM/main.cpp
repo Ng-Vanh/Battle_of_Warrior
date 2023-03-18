@@ -47,7 +47,7 @@ bool InitData()
 }
 bool LoadBackGround()
 {
-	bool ret = g_background.LoadImg("img/bk1.png", g_screen);
+	bool ret = g_background.LoadImg("img/bk1.jpg", g_screen);
 	if (ret == false)
 		return false;
 	return true;
@@ -87,7 +87,7 @@ std::vector<ThreatObject*> MakeThreatList()
 		{
 			p_threat->LoadImg("img//threat_level.png", g_screen);
 			p_threat->set_clips();
-			p_threat->set_x_pos(750 + i * 1200);
+			p_threat->set_x_pos(900 + i * 1200);
 			p_threat->set_y_pos(250);
 			p_threat->set_type_move_(ThreatObject::STATIC_THREAT);
 			p_threat->set_input_left(0);

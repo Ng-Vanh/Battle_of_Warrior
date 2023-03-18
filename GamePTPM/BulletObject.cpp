@@ -5,7 +5,7 @@ BulletObject::BulletObject()
 	x_val_ = 0;
 	y_val_ = 0;
 	is_move_ = false;
-	bullet_type_ = SPHERE_BULLET;
+	bullet_type_ = KAME_BULLET_L;
 
 }
 BulletObject::~BulletObject()
@@ -19,12 +19,17 @@ bool BulletObject::LoadImgBullet(SDL_Renderer* des)
 	{
 		ret = LoadImg("img//laze_bullet.png", des);
 	}
-	else if (bullet_type_ == SPHERE_BULLET)
+	else if (bullet_type_ == KAME_BULLET_L)
 	{
-		ret = LoadImg("img//sphere_bullet.png", des);
+		ret = LoadImg("img//kameL.png", des);
+	}
+	else if (bullet_type_ == KAME_BULLET_R)
+	{
+		ret = LoadImg("img//kameR.png", des);
 	}
 	return ret;
 }
+
 void BulletObject::HandleMove(const int& x_boder, const int& y_boder)
 {
 	if (bullet_dir_ == DIR_RIGHT)

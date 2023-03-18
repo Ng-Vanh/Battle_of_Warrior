@@ -48,43 +48,13 @@ void MainObject::set_clip()
 		frame_clip_[0].w = width_frame_;
 		frame_clip_[0].h = height_frame_;
 
-		frame_clip_[1].x = width_frame_;
-		frame_clip_[1].y = 0;
-		frame_clip_[1].w = width_frame_;
-		frame_clip_[1].h = height_frame_;
-
-		frame_clip_[2].x = 2 * width_frame_;
-		frame_clip_[2].y = 0;
-		frame_clip_[2].w = width_frame_;
-		frame_clip_[2].h = height_frame_;
-
-		frame_clip_[3].x = 3 * width_frame_;
-		frame_clip_[3].y = 0;
-		frame_clip_[3].w = width_frame_;
-		frame_clip_[3].h = height_frame_;
-
-		frame_clip_[4].x = 4 * width_frame_;
-		frame_clip_[4].y = 0;
-		frame_clip_[4].w = width_frame_;
-		frame_clip_[4].h = height_frame_;
-
-		frame_clip_[5].x = 5 * width_frame_;
-		frame_clip_[5].y = 0;
-		frame_clip_[5].w = width_frame_;
-		frame_clip_[5].h = height_frame_;
-
-		frame_clip_[6].x = 6 * width_frame_;
-		frame_clip_[6].y = 0;
-		frame_clip_[6].w = width_frame_;
-		frame_clip_[6].h = height_frame_;
-
-		frame_clip_[7].x = 7 * width_frame_;
-		frame_clip_[7].y = 0;
-		frame_clip_[7].w = width_frame_;
-		frame_clip_[7].h = height_frame_;
-
-
-
+		for (int i = 1; i <= 7; i++)
+		{
+			frame_clip_[i].x = i * width_frame_;
+			frame_clip_[i].y = 0;
+			frame_clip_[i].w = width_frame_;
+			frame_clip_[i].h = height_frame_;
+		}
 	}
 }
 
@@ -178,7 +148,16 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* screen)
 		else if (events.button.button == SDL_BUTTON_LEFT)
 		{
 			BulletObject* p_bullet = new BulletObject();
-			p_bullet->set_bullet_type(BulletObject::SPHERE_BULLET);
+
+			if (status_ == WALK_LEFT)
+			{
+				p_bullet->set_bullet_type(BulletObject::KAME_BULLET_L);
+			}
+			else if (status_ = WALK_RIGHT)
+			{
+				p_bullet->set_bullet_type(BulletObject::KAME_BULLET_R);
+			}
+
 			p_bullet->LoadImgBullet(screen);
 
 			if (status_ == WALK_LEFT)
@@ -465,11 +444,18 @@ void MainObject::UpDateImagePlayer(SDL_Renderer* des)
 	{
 		if (status_ == WALK_LEFT)
 		{
-			LoadImg("img//goku_left.png", des);
+			if (p_bullet_list.size() != 0 && input_type_.left_ != 1 && input_type_.right_ != 1)
+				LoadImg("img//goku_shot_left.png", des);
+			else
+				LoadImg("img//goku_left.png", des);
 		}
 		else if (status_ == WALK_RIGHT)
 		{
-			LoadImg("img//goku_right.png", des);
+
+			if (p_bullet_list.size() != 0 && input_type_.left_ != 1 && input_type_.right_ != 1)
+				LoadImg("img//goku_shot_right.png", des);
+			else
+				LoadImg("img//goku_right.png", des);
 		}
 	}
 	else

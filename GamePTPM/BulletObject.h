@@ -20,7 +20,8 @@ public:
 	};
 	enum BulletType
 	{
-		SPHERE_BULLET = 50,
+		KAME_BULLET_L = 50,
+		KAME_BULLET_R = 52,
 		LAZE_BULLET = 51,
 	};
 
