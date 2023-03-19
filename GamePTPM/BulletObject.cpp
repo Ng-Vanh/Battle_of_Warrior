@@ -92,6 +92,4 @@ void BulletObject::HandleMove(const int& x_boder, const int& y_boder)
 			is_move_ = false;
 		}
 	}
-
-
 }

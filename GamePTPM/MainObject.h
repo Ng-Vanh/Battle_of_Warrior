@@ -37,12 +37,14 @@ public:
 	}
 	void CenterEnityOnMap(Map& map_data);
 	void UpDateImagePlayer(SDL_Renderer* des);
+	SDL_Rect GetRectFrame();
 
 	void set_bullet_list(std::vector<BulletObject*> bullet_list)
 	{
 		p_bullet_list = bullet_list;
 	}
 	std::vector<BulletObject*> get_bullet_list() const { return p_bullet_list; }
+	void RemoveBullet(const int& idx);
 	void InCreaseMoney();
 
 private:

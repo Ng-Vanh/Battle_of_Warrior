@@ -39,40 +39,18 @@ void ThreatObject::set_clips()
 		frame_clip_[0].w = width_frame_;
 		frame_clip_[0].h = height_frame_;
 
-		frame_clip_[1].x = width_frame_;
-		frame_clip_[1].y = 0;
-		frame_clip_[1].w = width_frame_;
-		frame_clip_[1].h = height_frame_;
 
-		frame_clip_[2].x = 2 * width_frame_;
-		frame_clip_[2].y = 0;
-		frame_clip_[2].w = width_frame_;
-		frame_clip_[2].h = height_frame_;
+		for (int i = 1; i <= 7; i++)
+		{
+			frame_clip_[i].x = i*width_frame_;
+			frame_clip_[i].y = 0;
+			frame_clip_[i].w = width_frame_;
+			frame_clip_[i].h = height_frame_;
+		}
 
-		frame_clip_[3].x = 3 * width_frame_;
-		frame_clip_[3].y = 0;
-		frame_clip_[3].w = width_frame_;
-		frame_clip_[3].h = height_frame_;
+		
 
-		frame_clip_[4].x = 4 * width_frame_;
-		frame_clip_[4].y = 0;
-		frame_clip_[4].w = width_frame_;
-		frame_clip_[4].h = height_frame_;
-
-		frame_clip_[5].x = 5 * width_frame_;
-		frame_clip_[5].y = 0;
-		frame_clip_[5].w = width_frame_;
-		frame_clip_[5].h = height_frame_;
-
-		frame_clip_[6].x = 6 * width_frame_;
-		frame_clip_[6].y = 0;
-		frame_clip_[6].w = width_frame_;
-		frame_clip_[6].h = height_frame_;
-
-		frame_clip_[7].x = 7 * width_frame_;
-		frame_clip_[7].y = 0;
-		frame_clip_[7].w = width_frame_;
-		frame_clip_[7].h = height_frame_;
+		
 	}
 }
 void ThreatObject::Show(SDL_Renderer* des)
@@ -90,6 +68,30 @@ void ThreatObject::Show(SDL_Renderer* des)
 		SDL_Rect rendQuad = { rect_.x, rect_.y, width_frame_, height_frame_ };
 		SDL_RenderCopy(des, p_object, currentClip, &rendQuad);
 
+	}
+}
+
+SDL_Rect ThreatObject::GetRectFrame()
+{
+	SDL_Rect rect;
+	rect.x = rect_.x;
+	rect.y = rect_.y;
+	rect.h = height_frame_;
+	rect.w = width_frame_;
+	return rect;
+}
+void ThreatObject::RemoveBullet(const int& idx)
+{
+	int size = bullet_list_.size();
+	if (size > 0 && idx < size)
+	{
+		BulletObject* p_bullet = bullet_list_.at(idx);
+		bullet_list_.erase(bullet_list_.begin() + idx);//xoa bo
+		if (p_bullet)
+		{
+			delete p_bullet;
+			p_bullet = NULL;
+		}
 	}
 }
 void ThreatObject::DoPlayer(Map& gMap)
@@ -296,6 +298,8 @@ void ThreatObject::ImpMoveType(SDL_Renderer* screen)
 }
 void ThreatObject::InitBullet(BulletObject* p_bullet, SDL_Renderer* screen)
 {
+	int xp = x_pos_ - map_x_;
+	int yp = y_pos_ - map_y_;
 	if (p_bullet != NULL)
 	{
 		p_bullet->set_bullet_type(BulletObject::LAZE_BULLET);
@@ -304,7 +308,7 @@ void ThreatObject::InitBullet(BulletObject* p_bullet, SDL_Renderer* screen)
 		{
 			p_bullet->set_is_move(true);
 			p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
-			p_bullet->SetRect(rect_.x + 10, rect_.y + 10);
+			p_bullet->SetRect(xp + 10, yp + 10);
 			p_bullet->set_x_val(15);
 			bullet_list_.push_back(p_bullet);
 		}
@@ -333,7 +337,7 @@ void ThreatObject::MakeBullet(SDL_Renderer* screen, const int& x_limit, const in
 			else// vien dan di qua man hinh
 			{
 				p_bullet->set_is_move(true);
-				p_bullet->SetRect(rect_.x + 5, rect_.y + 10);
+				p_bullet->SetRect(rect_.x + 5, rect_.y + 5);
 			}
 		}
 	}

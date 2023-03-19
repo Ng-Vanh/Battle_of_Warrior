@@ -35,10 +35,12 @@ public:
 
 	int get_width_frame() const { return width_frame_; }
 	int get_height_frame() const { return height_frame_; }
+	SDL_Rect GetRectFrame();
 
 	void DoPlayer(Map& gMap);
 	void CheckToMap(Map& gMap);
 	void InitThreat();
+	void RemoveBullet(const int& idx);
 
 	void set_type_move_(const int& typeMove) { type_move_ = typeMove; }
 	void setAnimationPos(const int& pos_a, const int& pos_b)
