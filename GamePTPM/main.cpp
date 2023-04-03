@@ -5,7 +5,12 @@
 #include "MainObject.h"
 #include "ImpTimer.h"
 #include "ThreatObject.h"
+#include "ExplosionObj.h"
+#include "Text.h"
+
 BaseObject g_background;
+TTF_Font* font_common;
+
 
 void close()
 {
@@ -41,6 +46,15 @@ bool InitData()
 			int imgFlags = IMG_INIT_PNG;
 			if (!(IMG_Init(imgFlags) && imgFlags))
 				success = false;
+		}
+		if (TTF_Init() == -1)
+		{
+			success = false;
+		}
+		font_common = TTF_OpenFont("font//dlxfont_.ttf", 15);
+		if (font_common == NULL)
+		{
+			success = false;
 		}
 	}
 	return success;
@@ -124,6 +138,33 @@ int main(int argc, char* argv[])
 
 	std::vector<ThreatObject*> threats_list = MakeThreatList();
 
+	//Khoi tao vu no
+	ExplosionObj exp_threat;
+	bool tRet = exp_threat.LoadImg("img//exp3.png", g_screen);
+	if (!tRet)
+	{
+		return false;
+	}
+	else {
+		exp_threat.set_clip();
+	}
+	ExplosionObj exp_player;
+	bool epRet = exp_player.LoadImg("img//exp33.png", g_screen);
+	if (!epRet)
+	{
+		return false;
+	}
+	else {
+		exp_player.set_clip();
+	}
+	int heart = 0;
+
+	//Text trong Game:
+	TextObj time_game;
+	time_game.SetColor(TextObj::RED_TXT);
+	TextObj Coin_txt;
+	Coin_txt.SetColor(TextObj::RED_TXT);
+
 
 	bool is_quit = false;
 	while (!is_quit)
@@ -154,6 +195,8 @@ int main(int argc, char* argv[])
 		game_map.setMap(map_data);
 		game_map.DrawMap(g_screen);
 
+		
+
 		//Threat
 		for (int i = 0; i < threats_list.size(); i++)
 		{
@@ -177,6 +220,7 @@ int main(int argc, char* argv[])
 						bCol1 = SDLCommonFunc::CheckCollision(pt_bullet->GetRect(), rect_player);
 						if (bCol1)
 						{
+							
 							p_threat->RemoveBullet(j);
 							break;
 						}
@@ -187,17 +231,47 @@ int main(int argc, char* argv[])
 				bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
 				if (bCol1 || bCol2 )
 				{
-					if (MessageBox(NULL, L"GameOver!!",L"InFo", MB_OK | MB_ICONSTOP) == IDOK)
+					//Die
+					int frame_die_w = exp_player.get_frame_width();
+					int frame_die_h = exp_player.get_frame_height();
+
+					for (int ex = 0; ex < 8; ex++)
 					{
-						p_threat->Free();
-						close();
-						SDL_Quit();
-						return 0;
+						int x_pos = p_player.GetRect().x + p_player.get_frame_width() * 0.5 - frame_die_w * 0.5;
+						int y_pos = p_player.GetRect().y + p_player.get_frame_height() * 0.5 - frame_die_h * 0.5;
+
+						exp_threat.set_frame(ex);
+						exp_threat.SetRect(x_pos, y_pos);
+						exp_threat.Show(g_screen);
+						SDL_RenderPresent(g_screen);
 					}
+
+					heart++;
+					if (heart <= 3)
+					{
+						p_player.SetRect(0, 0);
+						p_player.set_comeback_time(40);
+						SDL_Delay(600);
+						continue;
+					}
+					else
+					{
+						if (MessageBox(NULL, L"GameOver!!", L"InFo", MB_OK | MB_ICONSTOP) == IDOK)
+						{
+							p_threat->Free();
+							close();
+							SDL_Quit();
+							return 0;
+						}
+					}
+
+					
 				}
 
 			}
 		}
+		int frame_exp_width = exp_threat.get_frame_width();
+		int frame_exp_height = exp_threat.get_frame_height();
 
 		std::vector<BulletObject*> bullet_arr = p_player.get_bullet_list();
 		for (int r = 0; r < bullet_arr.size(); r++)
@@ -222,6 +296,17 @@ int main(int argc, char* argv[])
 
 						if (bCol)
 						{
+							for (int ex = 0; ex < 8; ex++)
+							{
+								int x_pos = p_bullet->GetRect().x - frame_exp_width * 0.2;
+								int y_pos = p_bullet->GetRect().y - frame_exp_height * 0.5;
+
+								exp_threat.set_frame(ex);
+								exp_threat.SetRect(x_pos, y_pos);
+								exp_threat.Show(g_screen);
+								SDL_RenderPresent(g_screen);
+							}
+
 							p_player.RemoveBullet(r);
 							obj_threat->Free();
 							threats_list.erase(threats_list.begin() + t);
@@ -230,6 +315,39 @@ int main(int argc, char* argv[])
 				}
 			}
 		}
+
+
+		// show Text time:
+		std::string str_time = "Time: ";
+		Uint32 time_value = SDL_GetTicks() / 1000;
+		Uint32 value_time = 180 - time_value;
+		if (value_time <= 0)
+		{
+			if (MessageBox(NULL, L"GameOver!!", L"Alert", MB_OK | MB_ICONSTOP) == IDOK)
+			{
+				is_quit = true;
+				break;
+				/*close();
+				SDL_Quit();
+				return 0;*/
+			}
+		}
+		else {
+			std::string str_val = std::to_string(value_time);
+			str_time += str_val;
+
+			time_game.SetText(str_time);
+			time_game.LoadFromRenderText(font_common, g_screen);
+			time_game.RenderText(g_screen, SCREEN_WIDTH - 200, 15);
+		}
+		int cur_money = p_player.GetMoney();
+		std::string show_money = "Coin: ";
+		std::string money = std::to_string(cur_money);
+		show_money += money;
+		Coin_txt.SetText(show_money);
+		Coin_txt.LoadFromRenderText(font_common, g_screen);
+		Coin_txt.RenderText(g_screen, 100, 15);
+
 
 
 		SDL_RenderPresent(g_screen);

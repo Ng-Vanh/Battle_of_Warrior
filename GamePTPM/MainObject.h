@@ -27,6 +27,12 @@ public:
 	void HandleInputAction(SDL_Event events, SDL_Renderer* screen);
 	void HandleBullet(SDL_Renderer* des);
 	void set_clip();
+	void set_comeback_time(const int& cbTime)
+	{
+		come_back_time = cbTime;
+	}
+	int get_frame_width() const { return width_frame_; }
+	int get_frame_height() const { return height_frame_; }
 
 	void DoPlayer(Map& map_data);
 	void CheckToMap(Map& map_data);// kiem tra map 
@@ -46,7 +52,7 @@ public:
 	std::vector<BulletObject*> get_bullet_list() const { return p_bullet_list; }
 	void RemoveBullet(const int& idx);
 	void InCreaseMoney();
-
+	int GetMoney()const { return money_count; }
 private:
 	int money_count;
 	std::vector<BulletObject*> p_bullet_list;
