@@ -51,7 +51,7 @@ bool InitData()
 		{
 			success = false;
 		}
-		font_common = TTF_OpenFont("font//dlxfont_.ttf", 15);
+		font_common = TTF_OpenFont("font//ObelixProB-cyr.ttf", 15);
 		if (font_common == NULL)
 		{
 			success = false;
@@ -61,7 +61,7 @@ bool InitData()
 }
 bool LoadBackGround()
 {
-	bool ret = g_background.LoadImg("img/bk1.jpg", g_screen);
+	bool ret = g_background.LoadImg("img//bk1.jpg", g_screen);
 	if (ret == false)
 		return false;
 	return true;
