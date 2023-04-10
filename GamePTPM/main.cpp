@@ -7,6 +7,7 @@
 #include "ThreatObject.h"
 #include "ExplosionObj.h"
 #include "Text.h"
+#include "GamePower.h"
 
 BaseObject g_background;
 TTF_Font* font_common;
@@ -51,7 +52,7 @@ bool InitData()
 		{
 			success = false;
 		}
-		font_common = TTF_OpenFont("font//ObelixProB-cyr.ttf", 15);
+		font_common = TTF_OpenFont("font//ObelixProB-cyr.ttf", 20);
 		if (font_common == NULL)
 		{
 			success = false;
@@ -70,9 +71,10 @@ std::vector<ThreatObject*> MakeThreatList()
 {
 	std::vector<ThreatObject*> list_threats;// static threat
 
-
+	
 	ThreatObject* dynamic_threats = new ThreatObject[20];
-	for (int i = 0; i < 20; i++)
+	srand(time(0));
+	for (int i = 1; i < 20; i++)
 	{
 		ThreatObject* p_threat = (dynamic_threats + i);
 		if (p_threat != NULL)
@@ -80,11 +82,11 @@ std::vector<ThreatObject*> MakeThreatList()
 			p_threat->LoadImg("img//threat_left.png", g_screen);
 			p_threat->set_clips();
 			p_threat->set_type_move_(ThreatObject::MOVE_IN_SPACE_THREAT);// trang thai threat: di chuyen
-			p_threat->set_x_pos(550 + i * 1250);
+			p_threat->set_x_pos(rand() %926 + i * 1250);
 			p_threat->set_y_pos(399);
 
-			int pos1 = p_threat->get_x_pos() - 60;
-			int pos2 = p_threat->get_x_pos() + 60;
+			int pos1 = p_threat->get_x_pos() - 120;
+			int pos2 = p_threat->get_x_pos() + 120;
 			p_threat->setAnimationPos(pos1, pos2);// di chuyen trong pham vi pos1-->pos2
 			p_threat->set_input_left(1);
 
@@ -94,14 +96,14 @@ std::vector<ThreatObject*> MakeThreatList()
 	}
 
 	ThreatObject* threats_objs = new ThreatObject[20];
-	for (int i = 0; i < 20; i++)
+	for (int i = 1; i < 18; i++)
 	{
 		ThreatObject* p_threat = (threats_objs + i);
 		if (p_threat != NULL)
 		{
 			p_threat->LoadImg("img//threat_level.png", g_screen);
 			p_threat->set_clips();
-			p_threat->set_x_pos(900 + i * 1200);
+			p_threat->set_x_pos(rand()%930 + i * 890);
 			p_threat->set_y_pos(250);
 			p_threat->set_type_move_(ThreatObject::STATIC_THREAT);
 			p_threat->set_input_left(0);
@@ -135,6 +137,16 @@ int main(int argc, char* argv[])
 	MainObject p_player;
 	p_player.LoadImg("img//goku_right.png", g_screen);
 	p_player.set_clip();
+
+	GamePower player_heart;
+	player_heart.Init(g_screen);
+
+	Coin player_money;
+	player_money.Init(g_screen);
+	player_money.setPos(SCREEN_WIDTH / 2 - 100, 12);
+
+
+
 
 	std::vector<ThreatObject*> threats_list = MakeThreatList();
 
@@ -195,7 +207,13 @@ int main(int argc, char* argv[])
 		game_map.setMap(map_data);
 		game_map.DrawMap(g_screen);
 
-		
+
+		//show Mang:
+
+		player_heart.Show(g_screen);
+
+		//Show coin
+		player_money.Show(g_screen);
 
 		//Threat
 		for (int i = 0; i < threats_list.size(); i++)
@@ -252,6 +270,8 @@ int main(int argc, char* argv[])
 						p_player.SetRect(0, 0);
 						p_player.set_comeback_time(40);
 						SDL_Delay(600);
+						player_heart.Decrease();
+						player_heart.Render(g_screen);
 						continue;
 					}
 					else
@@ -338,15 +358,15 @@ int main(int argc, char* argv[])
 
 			time_game.SetText(str_time);
 			time_game.LoadFromRenderText(font_common, g_screen);
-			time_game.RenderText(g_screen, SCREEN_WIDTH - 200, 15);
+			time_game.RenderText(g_screen, SCREEN_WIDTH - 200, 12);
 		}
 		int cur_money = p_player.GetMoney();
-		std::string show_money = "Coin: ";
+		std::string show_money = ": ";
 		std::string money = std::to_string(cur_money);
 		show_money += money;
 		Coin_txt.SetText(show_money);
 		Coin_txt.LoadFromRenderText(font_common, g_screen);
-		Coin_txt.RenderText(g_screen, 100, 15);
+		Coin_txt.RenderText(g_screen, SCREEN_WIDTH / 2 - 70, 15);
 
 
 
