@@ -9,7 +9,7 @@
 #include "Text.h"
 #include "GamePower.h"
 #include "BossObj.h"
-
+#include "Sound.h"
 BaseObject g_background;
 TTF_Font* font_common;
 
@@ -23,6 +23,7 @@ void close()
 	g_Window = NULL;
 	IMG_Quit();
 	SDL_Quit();
+	Mix_CloseAudio();
 }
 
 bool InitData()
@@ -60,6 +61,17 @@ bool InitData()
 		}
 	}
 	return success;
+}
+bool LoadMedia()
+{
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		return false;
+	}
+	if (CheckSound == false)
+	{
+		return false;
+	}
 }
 bool LoadBackGround()
 {
@@ -128,6 +140,8 @@ int main(int argc, char* argv[])
 	if (InitData() == false)
 		return -1;
 	if (LoadBackGround() == false)
+		return -1;
+	if (LoadMedia() == false)
 		return -1;
 
 	GameMap game_map;
@@ -333,11 +347,12 @@ int main(int argc, char* argv[])
 						tRect.h = obj_threat->get_height_frame();
 
 
-						SDL_Rect bRect = p_bullet->GetRect();
-						bool bCol = SDLCommonFunc::CheckCollision(bRect, tRect);
+						SDL_Rect bRect = p_bullet->GetRect();//bRect: toa do dan player
+						bool bCol = SDLCommonFunc::CheckCollision(bRect, tRect);//tRect : Toa do threat
 
 						if (bCol)
 						{
+							MixHit();
 							for (int ex = 0; ex < 8; ex++)
 							{
 								int x_pos = p_bullet->GetRect().x - frame_exp_width * 0.2;
@@ -438,8 +453,7 @@ int main(int argc, char* argv[])
 
 				if (bCol == true)
 				{
-
-
+					MixHit();
 					for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
 					{
 						int x_pos = p_bullet->GetRect().x - frame_exp_width_boss * 0.5;

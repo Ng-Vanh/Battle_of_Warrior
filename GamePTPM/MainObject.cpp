@@ -1,5 +1,5 @@
 #include "MainObject.h"
-
+#include "Sound.h"
 MainObject::MainObject()
 {
 	frame_ = 0;
@@ -156,6 +156,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* screen)
 		}
 		else if (events.button.button == SDL_BUTTON_LEFT)
 		{
+			MixKame();
 			BulletObject* p_bullet = new BulletObject();
 
 			if (status_ == WALK_LEFT)
@@ -347,6 +348,7 @@ void MainObject::CheckToMap(Map& map_data)
 
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
+				MixGetCoin();
 				map_data.tile[y1][x2] = BLANK_TILE;
 				map_data.tile[y2][x2] = BLANK_TILE;
 				InCreaseMoney();
@@ -369,6 +371,7 @@ void MainObject::CheckToMap(Map& map_data)
 
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
+				MixGetCoin();
 				map_data.tile[y1][x1] = BLANK_TILE;
 				map_data.tile[y2][x1] = BLANK_TILE;
 				InCreaseMoney();
@@ -403,6 +406,7 @@ void MainObject::CheckToMap(Map& map_data)
 
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
+				MixGetCoin();
 				map_data.tile[y2][x1] = BLANK_TILE;
 				map_data.tile[y2][x2] = BLANK_TILE;
 				InCreaseMoney();
@@ -430,6 +434,7 @@ void MainObject::CheckToMap(Map& map_data)
 
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
+				MixGetCoin();
 				map_data.tile[y1][x1] = BLANK_TILE;
 				map_data.tile[y1][x2] = BLANK_TILE;
 				InCreaseMoney();
