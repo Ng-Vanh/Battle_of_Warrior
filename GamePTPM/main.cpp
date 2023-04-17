@@ -12,6 +12,8 @@
 #include "Sound.h"
 BaseObject g_background;
 TTF_Font* font_common;
+TTF_Font* font_menu = NULL;
+bool is_quit = false;
 
 
 void close()
@@ -33,7 +35,7 @@ bool InitData()
 	if (ret < 0) return false;
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
-	g_Window = SDL_CreateWindow("Gamecpp", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+	g_Window = SDL_CreateWindow("Battle_of_Warrior", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (g_Window == NULL)
 	{
@@ -62,6 +64,157 @@ bool InitData()
 	}
 	return success;
 }
+//======= Start: Load IMG : normal========
+SDL_Texture* LoadTexture(std::string path)
+{
+	SDL_Texture* newTexture = NULL;
+	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+	if (loadedSurface == NULL) std::cout << "Unable to load image " << path << " SDL_image Error: " << IMG_GetError() << std::endl;
+	else
+	{
+		newTexture = SDL_CreateTextureFromSurface(g_screen, loadedSurface);
+		if (newTexture == NULL) std::cout << "Unable to create texture from " << path << " SDL Error: " << SDL_GetError() << std::endl;
+		SDL_FreeSurface(loadedSurface);
+	}
+	return newTexture;
+}
+//======= End: Load IMG : normal========
+
+//======= Start: LoadMenu IntroGame========
+
+bool LoadMenu()
+{
+	bool succes = true;
+	g_texture = LoadTexture("img//introIMG.jpg");
+	if (g_texture == NULL)
+	{
+		std::cout << "Error image" << std::endl;
+		succes = false;
+	}
+	return succes;
+}
+
+bool createImage(SDL_Texture* texture)
+{
+	if (texture == NULL) return false;
+	SDL_RenderCopy(g_screen, texture, NULL, NULL);
+	return true;
+}
+int showMenu()
+{
+	if (TTF_Init() < 0)
+	{
+		std::cout << TTF_GetError();
+		return 0;
+	}
+	font_menu = TTF_OpenFont("font//ObelixProB-cyr.ttf", 60);
+
+	int x, y;
+
+	const int numMenu = 2;
+	SDL_Color colorMenu[numMenu] = { {243, 156, 18}, {255, 0, 0} };
+	std::string text[numMenu] = { "Play", "Exit" };
+	bool selected[numMenu] = { 0,0 };
+
+	SDL_Surface* surface[numMenu];
+	for (int i = 0; i < numMenu; i++) surface[i] = TTF_RenderText_Solid(font_menu, text[i].c_str(), colorMenu[0]);
+
+	SDL_Texture* texture[numMenu];
+	for (int i = 0; i < numMenu; i++) texture[i] = SDL_CreateTextureFromSurface(g_screen, surface[i]);
+	for (int i = 0; i < numMenu; i++) SDL_FreeSurface(surface[i]);
+
+	SDL_Rect scrRest[numMenu];
+	SDL_Rect desRest[numMenu];
+	for (int i = 0; i < numMenu; i++) TTF_SizeText(font_menu, text[i].c_str(), &scrRest[i].w, &scrRest[i].h);
+
+	scrRest[0].x = 0;
+	scrRest[0].y = 0;
+
+	desRest[0].x = 150;
+	desRest[0].y = 250;
+
+	desRest[0].w = scrRest[0].w;
+	desRest[0].h = scrRest[0].h;
+
+	scrRest[1].x = 0;
+	scrRest[1].y = 0;
+
+	desRest[1].x = 150;
+	desRest[1].y = 330;
+
+	desRest[1].w = scrRest[1].w;
+	desRest[1].h = scrRest[1].h;
+	while (!is_quit)
+	{
+		while (SDL_PollEvent(&g_event))
+		{
+			switch (g_event.type)
+			{
+			case SDL_QUIT:
+			{
+				is_quit = true;;
+				return 1;
+			}
+			case SDL_MOUSEMOTION:
+				x = g_event.motion.x;
+				y = g_event.motion.y;
+				for (int i = 0; i < numMenu; i++)
+				{
+					if (x >= desRest[i].x && x <= desRest[i].x + desRest[i].w && y >= desRest[i].y && y <= desRest[i].y + desRest[i].h)
+					{
+						if (!selected[i])
+						{
+							MixSelect();
+							selected[i] = 1;
+							surface[i] = TTF_RenderText_Solid(font_menu, text[i].c_str(), colorMenu[1]);
+							texture[i] = SDL_CreateTextureFromSurface(g_screen, surface[i]);
+						}
+					}
+					else
+					{
+						if (selected[i])
+						{
+							selected[i] = 0;
+							surface[i] = TTF_RenderText_Solid(font_menu, text[i].c_str(), colorMenu[0]);
+							texture[i] = SDL_CreateTextureFromSurface(g_screen, surface[i]);
+						}
+					}
+				}
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				x = g_event.button.x;
+				y = g_event.button.y;
+				for (int i = 0; i < numMenu; i++)
+				{
+					if (x >= desRest[i].x && x <= desRest[i].x + desRest[i].w && y >= desRest[i].y && y <= desRest[i].y + desRest[i].h)
+					{
+						return i;
+					}
+				}
+				break;
+			case SDL_KEYDOWN:
+				if (g_event.key.keysym.sym == SDLK_ESCAPE)
+				{
+					return 1;
+				}
+			default:
+			{
+				break;
+			}
+			}
+		}
+		for (int i = 0; i < numMenu; i++)
+		{
+			SDL_RenderCopy(g_screen, texture[i], &scrRest[i], &desRest[i]);
+			SDL_RenderPresent(g_screen);
+		}
+	}
+	return 1;
+}
+
+//=========End: Show: Menu============
+//=========Start: Load Sound Effect========
+
 bool LoadMedia()
 {
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
@@ -73,6 +226,10 @@ bool LoadMedia()
 		return false;
 	}
 }
+//=========End: Load Sound Effect========
+ 
+
+//=========Start: Load Background========
 bool LoadBackGround()
 {
 	bool ret = g_background.LoadImg("img//bk1.jpg", g_screen);
@@ -80,11 +237,11 @@ bool LoadBackGround()
 		return false;
 	return true;
 }
+
+//==========Start: Load Dynamic threat (No Bullet)
 std::vector<ThreatObject*> MakeThreatList()
 {
 	std::vector<ThreatObject*> list_threats;// static threat
-
-	
 	ThreatObject* dynamic_threats = new ThreatObject[20];
 	srand(time(0));
 	for (int i = 1; i < 20; i++)
@@ -107,7 +264,7 @@ std::vector<ThreatObject*> MakeThreatList()
 			list_threats.push_back(p_threat);
 		}
 	}
-
+//==========Start: Threat have bullets============
 	ThreatObject* threats_objs = new ThreatObject[20];
 	for (int i = 1; i < 18; i++)
 	{
@@ -129,39 +286,41 @@ std::vector<ThreatObject*> MakeThreatList()
 	}
 	return list_threats;
 }
-
+//=========================================
 #undef main 
 int main(int argc, char* argv[])
 {
 	ImpTimer fps_timer;
-
-
-
+// Khoi tao tat ca cac doi tuong==========
 	if (InitData() == false)
 		return -1;
+	if (LoadMenu() == true)
+	{
+		createImage(g_texture);
+		SDL_RenderPresent(g_screen);
+	}
 	if (LoadBackGround() == false)
 		return -1;
 	if (LoadMedia() == false)
 		return -1;
-
+//========================
+//======LoadMap===========
 	GameMap game_map;
 	char nameFileMap[] = "map/map01.dat";
 	game_map.LoadMap(nameFileMap);
 	game_map.LoadTiles(g_screen);
-
+//======LoadPlayer========
+	//Image
 	MainObject p_player;
 	p_player.LoadImg("img//goku_right.png", g_screen);
 	p_player.set_clip();
-
+	//Heart
 	GamePower player_heart;
 	player_heart.Init(g_screen);
-
+	//Coin
 	Coin player_money;
 	player_money.Init(g_screen);
 	player_money.setPos(SCREEN_WIDTH / 2 - 100, 12);
-
-
-
 
 	std::vector<ThreatObject*> threats_list = MakeThreatList();
 	//Boss:
@@ -212,9 +371,13 @@ int main(int argc, char* argv[])
 	Coin_txt.SetColor(TextObj::RED_TXT);
 
 
-	bool is_quit = false;
 	bool boss = true;
-
+	int tmp = showMenu();
+	if (tmp == 1)
+	{
+		is_quit = false;
+		return 0;
+	}
 	while (!is_quit)
 	{
 		fps_timer.start();

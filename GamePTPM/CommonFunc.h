@@ -14,6 +14,7 @@
 static SDL_Window* g_Window = NULL;
 static SDL_Renderer* g_screen = NULL;
 static SDL_Event g_event;
+static SDL_Texture* g_texture = NULL;
 
 //screen
 const int SCREEN_WIDTH = 1280;
