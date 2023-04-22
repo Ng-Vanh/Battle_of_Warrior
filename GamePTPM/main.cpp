@@ -303,6 +303,7 @@ int main(int argc, char* argv[])
 		return -1;
 	if (LoadMedia() == false)
 		return -1;
+	MixBackGround();
 //========================
 //======LoadMap===========
 	GameMap game_map;
@@ -314,10 +315,11 @@ int main(int argc, char* argv[])
 	MainObject p_player;
 	p_player.LoadImg("img//goku_right.png", g_screen);
 	p_player.set_clip();
-	//Heart
+	p_player.setScore(0);
+	//Heart icon
 	GamePower player_heart;
 	player_heart.Init(g_screen);
-	//Coin
+	//Coin icon
 	Coin player_money;
 	player_money.Init(g_screen);
 	player_money.setPos(SCREEN_WIDTH / 2 - 100, 12);
@@ -369,6 +371,8 @@ int main(int argc, char* argv[])
 	time_game.SetColor(TextObj::RED_TXT);
 	TextObj Coin_txt;
 	Coin_txt.SetColor(TextObj::RED_TXT);
+	TextObj score_txt;
+	score_txt.SetColor(TextObj::RED_TXT);
 
 
 	bool boss = true;
@@ -401,7 +405,27 @@ int main(int argc, char* argv[])
 		p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
 		p_player.DoPlayer(map_data);
 		p_player.Show(g_screen);
-
+		//Check Player outside map
+		if (p_player.GetRect().y > 630)
+		{
+			heart--;
+			p_player.SetRect(0, 0);
+			p_player.set_comeback_time(40);
+			SDL_Delay(600);
+			player_heart.Decrease();
+			player_heart.Render(g_screen);
+			continue;
+		}
+		if (heart == 0)
+		{
+			if (MessageBox(NULL, L"GameOver!!", L"InFo", MB_OK | MB_ICONSTOP) == IDOK)
+			{
+				close();
+				SDL_Quit();
+				return 0;
+			}
+		}
+//==End: Init Player=====================================
 		//Map
 		game_map.setMap(map_data);
 		game_map.DrawMap(g_screen);
@@ -443,7 +467,7 @@ int main(int argc, char* argv[])
 						}
 					}
 				}
-
+//=============Check va cham dan threat vs Player
 				SDL_Rect rect_threat = p_threat->GetRectFrame();
 				bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
 				if (bCol1 || bCol2 )
@@ -489,6 +513,7 @@ int main(int argc, char* argv[])
 
 			}
 		}
+		//check va cham dan player trung threat
 		int frame_exp_width = exp_threat.get_frame_width();
 		int frame_exp_height = exp_threat.get_frame_height();
 
@@ -515,6 +540,7 @@ int main(int argc, char* argv[])
 
 						if (bCol)
 						{
+							p_player.inCrease15Point();
 							MixHit();
 							for (int ex = 0; ex < 8; ex++)
 							{
@@ -633,7 +659,7 @@ int main(int argc, char* argv[])
 					p_player.RemoveBullet(r);
 					if (boss_blood == 0)
 					{
-						//mark_val += 10;
+						p_player.inCrease50Point();
 						BossObj.Free();
 						boss = false;
 						std::vector<BulletObject*> tBullet_list = BossObj.get_bullet_list();
@@ -658,7 +684,7 @@ int main(int argc, char* argv[])
 
 
 
-
+		//=====================SHOW TEXT==========
 		// show Text time:
 		std::string str_time = "Time: ";
 		Uint32 time_value = SDL_GetTicks() / 1000;
@@ -682,6 +708,7 @@ int main(int argc, char* argv[])
 			time_game.LoadFromRenderText(font_common, g_screen);
 			time_game.RenderText(g_screen, SCREEN_WIDTH - 200, 12);
 		}
+		//show coin
 		int cur_money = p_player.GetMoney();
 		std::string show_money = ": ";
 		std::string money = std::to_string(cur_money);
@@ -690,7 +717,14 @@ int main(int argc, char* argv[])
 		Coin_txt.LoadFromRenderText(font_common, g_screen);
 		Coin_txt.RenderText(g_screen, SCREEN_WIDTH / 2 - 70, 15);
 
-
+		//show SCORE
+		int cur_score = p_player.getScore();
+		std::string show_score = "Score: ";
+		std::string sc = std::to_string(cur_score);
+		show_score += sc;
+		score_txt.SetText(show_score);
+		score_txt.LoadFromRenderText(font_common, g_screen);
+		score_txt.RenderText(g_screen, 20, 40);
 
 		SDL_RenderPresent(g_screen);
 

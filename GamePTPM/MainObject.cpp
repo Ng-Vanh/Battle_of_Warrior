@@ -352,6 +352,7 @@ void MainObject::CheckToMap(Map& map_data)
 				map_data.tile[y1][x2] = BLANK_TILE;
 				map_data.tile[y2][x2] = BLANK_TILE;
 				InCreaseMoney();
+				inCrease5Point();
 			}
 			else
 			{
@@ -374,6 +375,7 @@ void MainObject::CheckToMap(Map& map_data)
 				MixGetCoin();
 				map_data.tile[y1][x1] = BLANK_TILE;
 				map_data.tile[y2][x1] = BLANK_TILE;
+				inCrease5Point();
 				InCreaseMoney();
 			}
 			else
@@ -409,6 +411,7 @@ void MainObject::CheckToMap(Map& map_data)
 				MixGetCoin();
 				map_data.tile[y2][x1] = BLANK_TILE;
 				map_data.tile[y2][x2] = BLANK_TILE;
+				inCrease5Point();
 				InCreaseMoney();
 			}
 			else
@@ -437,6 +440,7 @@ void MainObject::CheckToMap(Map& map_data)
 				MixGetCoin();
 				map_data.tile[y1][x1] = BLANK_TILE;
 				map_data.tile[y1][x2] = BLANK_TILE;
+				inCrease5Point();
 				InCreaseMoney();
 			}
 			else
@@ -502,6 +506,4 @@ void MainObject::UpDateImagePlayer(SDL_Renderer* des)
 void MainObject::InCreaseMoney()
 {
 	money_count++;
-	std::cout << "YOUR POINT: " << money_count << std::endl;
-
 }

@@ -2,6 +2,7 @@
 #include "SDL_mixer.h"
 
 static bool CheckSound = true;
+static Mix_Music* mix_bground;
 static Mix_Chunk* mix_kame = NULL;
 static Mix_Chunk* mix_hit_threat = NULL ;
 static Mix_Chunk* get_coin = NULL;
@@ -16,7 +17,7 @@ static void MixKame()
 	else
 	{
 		Mix_PlayChannel(-1, mix_kame, 0);
-		Mix_VolumeChunk(mix_kame, 50);
+		Mix_VolumeChunk(mix_kame, 10);
 	}
 }
 static void MixGetCoin()
@@ -41,6 +42,8 @@ static void MixHit()
 	else
 	{
 		Mix_PlayChannel(-1, mix_hit_threat, 0);
+		Mix_VolumeChunk(mix_hit_threat, 30);
+
 	}
 }
 static void MixSelect()
@@ -53,5 +56,16 @@ static void MixSelect()
 	else
 	{
 		Mix_PlayChannel(-1, mix_select_click, 0);
+	}
+}
+static void MixBackGround()
+{
+	mix_bground = Mix_LoadMUS("sound//bkMus.mp3");
+	if (mix_bground == NULL)
+	{
+		CheckSound = false;
+	}
+	else {
+		Mix_PlayMusic(mix_bground, -1);
 	}
 }

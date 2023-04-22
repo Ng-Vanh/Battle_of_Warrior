@@ -53,8 +53,12 @@ public:
 	void RemoveBullet(const int& idx);
 	void InCreaseMoney();
 	int GetMoney()const { return money_count; }
+	void setScore(const int& sc) { score = sc; }
+	int getScore()const { return score; }
+	void inCrease15Point() { score += 15; }
+	void inCrease5Point() { score += 5; }
+	void inCrease50Point() { score += 50; }
 private:
-	int money_count;
 	std::vector<BulletObject*> p_bullet_list;
 
 	float x_val_;// khi bam di chuyen 1 doan bang x_val
@@ -77,4 +81,7 @@ private:
 
 
 	int come_back_time = 0;
+
+	int money_count;
+	int score;
 };
