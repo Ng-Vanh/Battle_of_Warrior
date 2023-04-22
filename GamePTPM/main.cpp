@@ -708,6 +708,7 @@ int main(int argc, char* argv[])
 			time_game.LoadFromRenderText(font_common, g_screen);
 			time_game.RenderText(g_screen, SCREEN_WIDTH - 200, 12);
 		}
+
 		//show coin
 		int cur_money = p_player.GetMoney();
 		std::string show_money = ": ";
