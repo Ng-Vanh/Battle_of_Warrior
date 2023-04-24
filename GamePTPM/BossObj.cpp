@@ -110,7 +110,7 @@ void BossObject::ShowHP(SDL_Renderer* des, int& Boss_blood)
         SDL_Rect hp_;
         hp_.x = SCREEN_WIDTH - 1050;
         hp_.y = SCREEN_HEIGHT * 0.1;
-        hp_.w = SCREEN_WIDTH * 0.4 * Boss_blood / 50;
+        hp_.w = SCREEN_WIDTH * 0.3 * Boss_blood / 50;
         hp_.h = 50;
         SDL_RenderCopy(des, HP, NULL, &hp_);
     }

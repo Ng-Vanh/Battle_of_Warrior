@@ -459,10 +459,15 @@ int main(int argc, char* argv[])
 					if (pt_bullet)
 					{
 						bCol1 = SDLCommonFunc::CheckCollision(pt_bullet->GetRect(), rect_player);
-						if (bCol1)
+						if (bCol1 && heart ==0)
 						{
-							
+							MixHit();
 							p_threat->RemoveBullet(j);
+							break;
+						}
+						else if (bCol1 && heart >= 1)
+						{
+							MixHit();
 							break;
 						}
 					}
