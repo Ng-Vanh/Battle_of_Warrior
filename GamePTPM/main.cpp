@@ -11,6 +11,7 @@
 #include "BossObj.h"
 #include "Sound.h"
 BaseObject g_background;
+BaseObject endGame;
 TTF_Font* font_common;
 TTF_Font* font_menu = NULL;
 bool is_quit = false;
@@ -418,12 +419,8 @@ int main(int argc, char* argv[])
 		}
 		if (heart == 0)
 		{
-			if (MessageBox(NULL, L"GameOver!!", L"InFo", MB_OK | MB_ICONSTOP) == IDOK)
-			{
-				close();
-				SDL_Quit();
-				return 0;
-			}
+			p_player.RenderLoss(g_screen);
+
 		}
 //==End: Init Player=====================================
 		//Map
@@ -504,13 +501,10 @@ int main(int argc, char* argv[])
 					}
 					else
 					{
-						if (MessageBox(NULL, L"GameOver!!", L"InFo", MB_OK | MB_ICONSTOP) == IDOK)
-						{
-							p_threat->Free();
-							close();
-							SDL_Quit();
-							return 0;
-						}
+						endGame.RenderLoss(g_screen);
+						close();
+						SDL_Quit();
+
 					}
 
 					
@@ -622,7 +616,9 @@ int main(int argc, char* argv[])
 			}
 			else
 			{
-				//Game Won
+				endGame.RenderLoss(g_screen);
+				close();
+				SDL_Quit();
 			}
 		}
 		//Dan player trung boss
@@ -671,7 +667,8 @@ int main(int argc, char* argv[])
 						for (int jj = 0; jj < tBullet_list.size(); jj++)
 							BossObj.RemoveBullet(jj);
 
-						is_quit = true;
+						endGame.RenderWin(g_screen);
+						//is_quit = true;
 					}
 
 				}
@@ -696,14 +693,9 @@ int main(int argc, char* argv[])
 		Uint32 value_time = 180 - time_value;
 		if (value_time <= 0)
 		{
-			if (MessageBox(NULL, L"GameOver!!", L"Alert", MB_OK | MB_ICONSTOP) == IDOK)
-			{
-				is_quit = true;
-				break;
-				/*close();
-				SDL_Quit();
-				return 0;*/
-			}
+			endGame.RenderLoss(g_screen);
+			close();
+			SDL_Quit();
 		}
 		else {
 			std::string str_val = std::to_string(value_time);

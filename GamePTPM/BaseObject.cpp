@@ -50,3 +50,37 @@ void BaseObject::Free()
 		rect_.h = 0;
 	}
 }
+void BaseObject::RenderLoss(SDL_Renderer* render)
+{
+	SDL_Texture* newTexture = NULL;
+	SDL_Surface* loadedSurface = IMG_Load("img//gameover.jpg");
+	newTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
+	SDL_FreeSurface(loadedSurface);
+
+	SDL_Rect picLoss;
+	picLoss.w = loadedSurface->w;
+	picLoss.h = loadedSurface->h;
+	picLoss.x = SCREEN_WIDTH / 2 - loadedSurface->w / 2;
+	picLoss.y = SCREEN_HEIGHT / 2 - loadedSurface->h / 2;
+
+	SDL_RenderCopy(render, newTexture, NULL, &picLoss);
+	SDL_RenderPresent(render);
+	SDL_Delay(10000);
+}
+void BaseObject::RenderWin(SDL_Renderer* render)
+{
+	SDL_Texture* newTexture = NULL;
+	SDL_Surface* loadedSurface = IMG_Load("img//gamewin.png");
+	newTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
+	SDL_FreeSurface(loadedSurface);
+
+	SDL_Rect picWin;
+	picWin.w = loadedSurface->w;
+	picWin.h = loadedSurface->h;
+	picWin.x = SCREEN_WIDTH / 2 - loadedSurface->w / 2;
+	picWin.y = SCREEN_HEIGHT / 2 - loadedSurface->h / 2;
+
+	SDL_RenderCopy(render, newTexture, NULL, &picWin);
+	SDL_RenderPresent(render);
+	SDL_Delay(10000);
+}

@@ -20,6 +20,8 @@ public:
 	virtual bool LoadImg(std::string path, SDL_Renderer* screen);
 	void Render(SDL_Renderer* des, const SDL_Rect* clip = NULL);
 	void Free();
+	void RenderLoss(SDL_Renderer* render);
+	void RenderWin(SDL_Renderer* render);
 
 protected:
 	SDL_Texture* p_object;

@@ -3,19 +3,19 @@ C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(44,2): warning
 C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\CommonFunc.h(59,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
 C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\MainObject.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(246,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(255,36): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(258,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(247,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(256,36): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
 C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(259,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(276,36): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(333,20): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(486,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(487,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(552,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(553,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(604,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(605,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(653,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(654,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(228): warning C4715: 'LoadMedia': not all control paths return a value
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(260,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(277,36): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(334,20): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(483,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(484,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(546,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(547,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(598,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(599,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(649,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(650,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\ユーザー\source\repos\GamePTPM\GamePTPM\main.cpp(229): warning C4715: 'LoadMedia': not all control paths return a value
   GamePTPM.vcxproj -> C:\Users\ユーザー\source\repos\GamePTPM\x64\Debug\GamePTPM.exe
