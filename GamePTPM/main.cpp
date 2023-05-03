@@ -668,7 +668,7 @@ int main(int argc, char* argv[])
 							BossObj.RemoveBullet(jj);
 
 						endGame.RenderWin(g_screen);
-						//is_quit = true;
+						is_quit = true;
 					}
 
 				}
