@@ -81,22 +81,7 @@ void BossObject::Show(SDL_Renderer* des, int Boss_blood)
         SDL_RenderCopy(des, p_object, currentclip, &renderquad);
 
 
-        //ShowHP
-
-      /*  if (Boss_blood > 0)
-        {
-            SDL_Texture* HP;
-            string s = "img/Hp1.png";
-            SDL_Surface* load_surface = IMG_Load(s.c_str());
-            HP = SDL_CreateTextureFromSurface(des, load_surface);
-            SDL_Rect hp_;
-            hp_.x = SCREEN_WIDTH - 1050;
-            hp_.y = SCREEN_HEIGHT * 0.1;
-            hp_.w = SCREEN_WIDTH * 0.4 * Boss_blood / 50;
-            hp_.h = 50;
-            SDL_RenderCopy(des, HP, NULL, &hp_);
-        }*/
-
+      
     }
 }
 void BossObject::ShowHP(SDL_Renderer* des, int& Boss_blood)

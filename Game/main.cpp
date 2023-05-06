@@ -10,6 +10,8 @@
 #include "GamePower.h"
 #include "BossObj.h"
 #include "Sound.h"
+#include <ctime>
+#include <cstdlib>
 BaseObject g_background;
 BaseObject endGame;
 TTF_Font* font_common;
@@ -506,7 +508,7 @@ int main(int argc, char* argv[])
 						endGame.RenderLoss(g_screen);
 						close();
 						SDL_Quit();
-
+						is_quit = true;
 					}
 
 					
@@ -621,6 +623,7 @@ int main(int argc, char* argv[])
 				endGame.RenderLoss(g_screen);
 				close();
 				SDL_Quit();
+				is_quit = true;
 			}
 		}
 		//Dan player trung boss
@@ -698,6 +701,7 @@ int main(int argc, char* argv[])
 			endGame.RenderLoss(g_screen);
 			close();
 			SDL_Quit();
+			is_quit = true;
 		}
 		else {
 			std::string str_val = std::to_string(value_time);
