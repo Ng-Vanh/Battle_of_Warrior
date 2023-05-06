@@ -230,6 +230,7 @@ bool LoadMedia()
 	{
 		return false;
 	}
+	return true;
 }
 //=========End: Load Sound Effect========
  

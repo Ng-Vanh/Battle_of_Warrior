@@ -8,3 +8,7 @@
 ## Cách chơi
 - Bạn sẽ sử dụng 4 phím cơ bản `a-w-s-d` để di chuyển, sử dụng chuột trái để bắn chưởng tiêu diệt kẻ địch.
 - Bạn cũng hãy cố gắng ăn thật nhiều `coin` xuất hiện trên bản đồ để gia tăng số điểm.
+
+## Cách compile
+- Mở cmd tại thư mục chứa makefile
+- gõ dòng lệnh mingw32-make
