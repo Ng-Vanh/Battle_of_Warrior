@@ -6,7 +6,7 @@
 ## Cách chơi
 - Bạn sẽ sử dụng 4 phím cơ bản `a-w-s-d` để di chuyển, sử dụng chuột trái để bắn chưởng tiêu diệt kẻ địch.
 ![example](Game/readme/quai1.png) ![example](Game/readme/quai2.png)
-- Bạn cũng hãy cố gắng ăn thật nhiều `coin` xuất hiện trên bản đồ để gia tăng số điểm.![](readme/coin.png)
+- Bạn cũng hãy cố gắng ăn thật nhiều `coin` xuất hiện trên bản đồ để gia tăng số điểm.![example](Game/readme/coin.png)
 
 
 ## Cách compile
