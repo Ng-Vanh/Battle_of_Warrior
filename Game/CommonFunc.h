@@ -25,7 +25,7 @@ const int COLOR_KEY_R = 167;
 const int COLOR_KEY_G = 175;
 const int COLOR_KEY_B = 180;
 const int RENDER_DRAW_COLOR = 0xff;
-const int FPS = 30;
+const int FPS = 40;
 
 
 #define TILE_SIZE  64

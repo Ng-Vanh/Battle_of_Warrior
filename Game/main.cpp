@@ -1,22 +1,10 @@
-#include "SDL.h"
-#include "BaseObject.h"
-#include "CommonFunc.h"
-#include "GameMap.h"
-#include "MainObject.h"
-#include "ImpTimer.h"
-#include "ThreatObject.h"
-#include "ExplosionObj.h"
-#include "Text.h"
-#include "GamePower.h"
-#include "BossObj.h"
-#include "Sound.h"
+
+#include "menu.h"
 #include <ctime>
 #include <cstdlib>
 BaseObject g_background;
 BaseObject endGame;
 TTF_Font* font_common;
-TTF_Font* font_menu = NULL;
-bool is_quit = false;
 
 
 void close()
@@ -67,157 +55,6 @@ bool InitData()
 	}
 	return success;
 }
-//======= Start: Load IMG : normal========
-SDL_Texture* LoadTexture(std::string path)
-{
-	SDL_Texture* newTexture = NULL;
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-	if (loadedSurface == NULL) std::cout << "Unable to load image " << path << " SDL_image Error: " << IMG_GetError() << std::endl;
-	else
-	{
-		newTexture = SDL_CreateTextureFromSurface(g_screen, loadedSurface);
-		if (newTexture == NULL) std::cout << "Unable to create texture from " << path << " SDL Error: " << SDL_GetError() << std::endl;
-		SDL_FreeSurface(loadedSurface);
-	}
-	return newTexture;
-}
-//======= End: Load IMG : normal========
-
-//======= Start: LoadMenu IntroGame========
-
-bool LoadMenu()
-{
-	bool succes = true;
-	g_texture = LoadTexture("img//introIMG.jpg");
-	if (g_texture == NULL)
-	{
-		std::cout << "Error image" << std::endl;
-		succes = false;
-	}
-	return succes;
-}
-
-bool createImage(SDL_Texture* texture)
-{
-	if (texture == NULL) return false;
-	SDL_RenderCopy(g_screen, texture, NULL, NULL);
-	return true;
-}
-int showMenu()
-{
-	if (TTF_Init() < 0)
-	{
-		std::cout << TTF_GetError();
-		return 0;
-	}
-	font_menu = TTF_OpenFont("font//ObelixProB-cyr.ttf", 60);
-
-	int x, y;
-
-	const int numMenu = 2;
-	SDL_Color colorMenu[numMenu] = { {243, 156, 18}, {255, 0, 0} };
-	std::string text[numMenu] = { "Play", "Exit" };
-	bool selected[numMenu] = { 0,0 };
-
-	SDL_Surface* surface[numMenu];
-	for (int i = 0; i < numMenu; i++) surface[i] = TTF_RenderText_Solid(font_menu, text[i].c_str(), colorMenu[0]);
-
-	SDL_Texture* texture[numMenu];
-	for (int i = 0; i < numMenu; i++) texture[i] = SDL_CreateTextureFromSurface(g_screen, surface[i]);
-	for (int i = 0; i < numMenu; i++) SDL_FreeSurface(surface[i]);
-
-	SDL_Rect scrRest[numMenu];
-	SDL_Rect desRest[numMenu];
-	for (int i = 0; i < numMenu; i++) TTF_SizeText(font_menu, text[i].c_str(), &scrRest[i].w, &scrRest[i].h);
-
-	scrRest[0].x = 0;
-	scrRest[0].y = 0;
-
-	desRest[0].x = 150;
-	desRest[0].y = 250;
-
-	desRest[0].w = scrRest[0].w;
-	desRest[0].h = scrRest[0].h;
-
-	scrRest[1].x = 0;
-	scrRest[1].y = 0;
-
-	desRest[1].x = 150;
-	desRest[1].y = 330;
-
-	desRest[1].w = scrRest[1].w;
-	desRest[1].h = scrRest[1].h;
-	while (!is_quit)
-	{
-		while (SDL_PollEvent(&g_event))
-		{
-			switch (g_event.type)
-			{
-			case SDL_QUIT:
-			{
-				is_quit = true;;
-				return 1;
-			}
-			case SDL_MOUSEMOTION:
-				x = g_event.motion.x;
-				y = g_event.motion.y;
-				for (int i = 0; i < numMenu; i++)
-				{
-					if (x >= desRest[i].x && x <= desRest[i].x + desRest[i].w 
-						&& y >= desRest[i].y && y <= desRest[i].y + desRest[i].h)
-					{
-						if (!selected[i])
-						{
-							MixSelect();
-							selected[i] = 1;
-							surface[i] = TTF_RenderText_Solid(font_menu, text[i].c_str(), colorMenu[1]);
-							texture[i] = SDL_CreateTextureFromSurface(g_screen, surface[i]);
-						}
-					}
-					else
-					{
-						if (selected[i])
-						{
-							selected[i] = 0;
-							surface[i] = TTF_RenderText_Solid(font_menu, text[i].c_str(), colorMenu[0]);
-							texture[i] = SDL_CreateTextureFromSurface(g_screen, surface[i]);
-						}
-					}
-				}
-				break;
-			case SDL_MOUSEBUTTONDOWN:
-				x = g_event.button.x;
-				y = g_event.button.y;
-				for (int i = 0; i < numMenu; i++)
-				{
-					if (x >= desRest[i].x && x <= desRest[i].x + desRest[i].w 
-						&& y >= desRest[i].y && y <= desRest[i].y + desRest[i].h)
-					{
-						return i;
-					}
-				}
-				break;
-			case SDL_KEYDOWN:
-				if (g_event.key.keysym.sym == SDLK_ESCAPE)
-				{
-					return 1;
-				}
-			default:
-			{
-				break;
-			}
-			}
-		}
-		for (int i = 0; i < numMenu; i++)
-		{
-			SDL_RenderCopy(g_screen, texture[i], &scrRest[i], &desRest[i]);
-			SDL_RenderPresent(g_screen);
-		}
-	}
-	return 1;
-}
-
-//=========End: Show: Menu============
 //=========Start: Load Sound Effect========
 
 bool LoadMedia()
@@ -297,7 +134,7 @@ std::vector<ThreatObject*> MakeThreatList()
 int main(int argc, char* argv[])
 {
 	ImpTimer fps_timer;
-// Khoi tao tat ca cac doi tuong==========
+// Khoi tao tat ca cac doi tuong===
 	if (InitData() == false)
 		return -1;
 	if (LoadMenu() == true)
@@ -372,7 +209,7 @@ int main(int argc, char* argv[])
 	}
 	int heart = 3;
 
-	//Text trong Game:
+	//Show Text trong Game:
 	TextObj time_game;
 	time_game.SetColor(TextObj::RED_TXT);
 	TextObj Coin_txt;
@@ -406,7 +243,7 @@ int main(int argc, char* argv[])
 
 		Map map_data = game_map.getMap();
 
-		// Player
+		// Show Player
 		p_player.HandleBullet(g_screen);
 		p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
 		p_player.DoPlayer(map_data);
@@ -428,19 +265,16 @@ int main(int argc, char* argv[])
 
 		}
 //==End: Init Player=====================================
-		//Map
+		//Show Map
 		game_map.setMap(map_data);
 		game_map.DrawMap(g_screen);
-
-
-		//show Mang:
-
+		//show heart:
 		player_heart.Show(g_screen);
 
 		//Show coin
 		player_money.Show(g_screen);
 
-		//Threat
+		//Show Threat
 		for (int i = 0; i < threats_list.size(); i++)
 		{
 			ThreatObject* p_threat = threats_list.at(i);
@@ -511,8 +345,6 @@ int main(int argc, char* argv[])
 						SDL_Quit();
 						is_quit = true;
 					}
-
-					
 				}
 
 			}
@@ -538,7 +370,6 @@ int main(int argc, char* argv[])
 						tRect.w = obj_threat->get_width_frame();// neu dung getRect se lay ra width = 480px;
 						tRect.h = obj_threat->get_height_frame();
 
-
 						SDL_Rect bRect = p_bullet->GetRect();//bRect: toa do dan player
 						bool bCol = SDLCommonFunc::CheckCollision(bRect, tRect);//tRect : Toa do threat
 
@@ -556,7 +387,6 @@ int main(int argc, char* argv[])
 								exp_threat.Show(g_screen);
 								SDL_RenderPresent(g_screen);
 							}
-
 							p_player.RemoveBullet(r);
 							obj_threat->Free();
 							threats_list.erase(threats_list.begin() + t);
@@ -565,8 +395,6 @@ int main(int argc, char* argv[])
 				}
 			}
 		}
-
-
 		//Show Boss
 		BossObj.SetMapXY(map_data.start_x_, map_data.start_y_);
 		BossObj.DoPlayer(map_data, boss_blood);
@@ -681,22 +509,16 @@ int main(int argc, char* argv[])
 
 			}
 		}
-
-
 		int val = MAX_MAP_X * TILE_SIZE - (map_data.start_x_ + p_player.GetRect().x) - 750;
 		if (val <= SCREEN_WIDTH && boss == true)
 		{
 			BossObj.ShowHP(g_screen, boss_blood);
 		}
-
-
-
-
 		//=====================SHOW TEXT==========
 		// show Text time:
 		std::string str_time = "Time: ";
 		Uint32 time_value = SDL_GetTicks() / 1000;
-		Uint32 value_time = 180 - time_value;
+		Uint32 value_time = 240 - time_value;
 		if (value_time <= 0)
 		{
 			endGame.RenderLoss(g_screen);
@@ -754,7 +576,6 @@ int main(int argc, char* argv[])
 		}
 	}
 	threats_list.clear();
-
 	close();
 	return 0;
 }
