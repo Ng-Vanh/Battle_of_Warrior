@@ -4,9 +4,9 @@
 #include "BulletObject.h"
 
 #define THREAT_FRAME_NUMBER 8
-#define THREAT_GRAVITY_SPEED 0.6
-#define THREAT_MAX_FAIL_SPEED 10
-#define THREAT_SPEED 3
+#define THREAT_GRAVITY_SPEED 0.3
+#define THREAT_MAX_FAIL_SPEED 6
+#define THREAT_SPEED 2
 class ThreatObject : public BaseObject
 {
 public:

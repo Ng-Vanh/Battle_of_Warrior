@@ -5,9 +5,9 @@
 #include "BaseObject.h";
 #include "BulletObject.h"
 
-#define GRAVITY_SPEED 0.4
+#define GRAVITY_SPEED 0.5
 #define MAX_FAIL_SPEED 10
-#define PLAYER_SPEED 9
+#define PLAYER_SPEED 10
 #define PLAYER_JUMP_VALUE 15
 
 class MainObject :public BaseObject

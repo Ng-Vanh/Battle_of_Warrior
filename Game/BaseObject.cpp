@@ -53,7 +53,7 @@ void BaseObject::Free()
 void BaseObject::RenderLoss(SDL_Renderer* render)
 {
 	SDL_Texture* newTexture = NULL;
-	SDL_Surface* loadedSurface = IMG_Load("img//gameover.jpg");
+	SDL_Surface* loadedSurface = IMG_Load("img//gameover.png");
 	newTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
 	SDL_FreeSurface(loadedSurface);
 

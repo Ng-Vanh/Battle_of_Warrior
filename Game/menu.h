@@ -40,7 +40,7 @@ static bool createImage(SDL_Texture* texture)
 static bool LoadMenu()
 {
 	bool succes = true;
-	g_texture = LoadTexture("img//introIMG.jpg");
+	g_texture = LoadTexture("img//intro.png");
 	if (g_texture == NULL)
 	{
 		std::cout << "Error image" << std::endl;
@@ -62,7 +62,7 @@ static int showMenu()
 	int x, y;
 
 	const int numMenu = 2;
-	SDL_Color colorMenu[numMenu] = { {142, 22, 222}, {255, 0, 0} };
+	SDL_Color colorMenu[numMenu] = { {255, 62, 48}, {235, 244, 245} };
 	std::string text[numMenu] = { "Play", "Exit" };
 	bool selected[numMenu] = { 0,0 };
 
@@ -80,7 +80,7 @@ static int showMenu()
 	scrRest[0].x = 0;
 	scrRest[0].y = 0;
 
-	desRest[0].x = SCREEN_WIDTH/2 - 100;
+	desRest[0].x = 870;
 	desRest[0].y = 250;
 
 	desRest[0].w = scrRest[0].w;
@@ -89,7 +89,7 @@ static int showMenu()
 	scrRest[1].x = 0;
 	scrRest[1].y = 0;
 
-	desRest[1].x = SCREEN_WIDTH/2 - 100;
+	desRest[1].x = 870;
 	desRest[1].y = 330;
 
 	desRest[1].w = scrRest[1].w;

@@ -173,7 +173,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* screen)
 			if (status_ == WALK_LEFT)
 			{
 				p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
-				p_bullet->SetRect(this->rect_.x, rect_.y + height_frame_ * 0.25);
+				p_bullet->SetRect(this->rect_.x, rect_.y + height_frame_ * 0.35);
 
 			}
 			else if (status_ == WALK_RIGHT)
@@ -478,28 +478,28 @@ void MainObject::UpDateImagePlayer(SDL_Renderer* des)
 		if (status_ == WALK_LEFT)
 		{
 			if (p_bullet_list.size() != 0 && input_type_.left_ != 1 && input_type_.right_ != 1)
-				LoadImg("img//goku_shot_left.png", des);
+				LoadImg("img//shotL.png", des);
 			else
-				LoadImg("img//goku_left.png", des);
+				LoadImg("img//runL.png", des);
 		}
 		else if (status_ == WALK_RIGHT)
 		{
 
 			if (p_bullet_list.size() != 0 && input_type_.left_ != 1 && input_type_.right_ != 1)
-				LoadImg("img//goku_shot_right.png", des);
+				LoadImg("img//shotR.png", des);
 			else
-				LoadImg("img//goku_right.png", des);
+				LoadImg("img//runR.png", des);
 		}
 	}
 	else
 	{
 		if (status_ == WALK_LEFT)
 		{
-			LoadImg("img//fly_left.png", des);
+			LoadImg("img//jumpL.png", des);
 		}
 		else if (status_ == WALK_RIGHT)
 		{
-			LoadImg("img//fly_right.png", des);
+			LoadImg("img//jumpR.png", des);
 		}
 	}
 }

@@ -308,7 +308,7 @@ void ThreatObject::InitBullet(BulletObject* p_bullet, SDL_Renderer* screen)
 		{
 			p_bullet->set_is_move(true);
 			p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
-			p_bullet->SetRect(xp + 10, yp + 10);
+			p_bullet->SetRect(xp + 10, yp + 20);
 			p_bullet->set_x_val(15);
 			bullet_list_.push_back(p_bullet);
 		}

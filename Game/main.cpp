@@ -1,7 +1,6 @@
-
-#include "menu.h"
 #include <ctime>
 #include <cstdlib>
+#include "menu.h"
 BaseObject g_background;
 BaseObject endGame;
 TTF_Font* font_common;
@@ -75,7 +74,7 @@ bool LoadMedia()
 //=========Start: Load Background========
 bool LoadBackGround()
 {
-	bool ret = g_background.LoadImg("img//bk1.jpg", g_screen);
+	bool ret = g_background.LoadImg("img//bk2.png", g_screen);
 	if (ret == false)
 		return false;
 	return true;
@@ -84,10 +83,12 @@ bool LoadBackGround()
 //==========Start: Load Dynamic threat (No Bullet)
 std::vector<ThreatObject*> MakeThreatList()
 {
+    int dynamics_pos[13] = {1065,3337,3626,5170,6436,7900,9203,10634,11952,13421,15416,19743,21098};
+    int shot_threats_pos[9] = {2060,2500,4342,6800,8400,9830,14418,16826,18259};
 	std::vector<ThreatObject*> list_threats;// static threat
 	ThreatObject* dynamic_threats = new ThreatObject[20];
-	srand(time(0));
-	for (int i = 1; i < 20; i++)
+
+	for (int i = 0; i < 13; i++)
 	{
 		ThreatObject* p_threat = (dynamic_threats + i);
 		if (p_threat != NULL)
@@ -95,28 +96,27 @@ std::vector<ThreatObject*> MakeThreatList()
 			p_threat->LoadImg("img//threat_left.png", g_screen);
 			p_threat->set_clips();
 			p_threat->set_type_move_(ThreatObject::MOVE_IN_SPACE_THREAT);// trang thai threat: di chuyen
-			p_threat->set_x_pos(rand() %926 + i * 1250);
+			p_threat->set_x_pos(dynamics_pos[i]);
 			p_threat->set_y_pos(399);
 
-			int pos1 = p_threat->get_x_pos() - 120;
-			int pos2 = p_threat->get_x_pos() + 120;
+			int pos1 = p_threat->get_x_pos() - 110;
+			int pos2 = p_threat->get_x_pos() + 110;
 			p_threat->setAnimationPos(pos1, pos2);// di chuyen trong pham vi pos1-->pos2
 			p_threat->set_input_left(1);
-
 
 			list_threats.push_back(p_threat);
 		}
 	}
 //==========Start: Threat have bullets============
 	ThreatObject* threats_objs = new ThreatObject[20];
-	for (int i = 1; i < 18; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		ThreatObject* p_threat = (threats_objs + i);
 		if (p_threat != NULL)
 		{
 			p_threat->LoadImg("img//threat_level.png", g_screen);
 			p_threat->set_clips();
-			p_threat->set_x_pos(rand()%1930 + i * 890);
+			p_threat->set_x_pos(shot_threats_pos[i]);
 			p_threat->set_y_pos(250);
 			p_threat->set_type_move_(ThreatObject::STATIC_THREAT);
 			p_threat->set_input_left(0);
@@ -150,13 +150,13 @@ int main(int argc, char* argv[])
 //========================
 //======LoadMap===========
 	GameMap game_map;
-	char nameFileMap[] = "map/map01.dat";
+	char nameFileMap[] = "map//map01.dat";
 	game_map.LoadMap(nameFileMap);
 	game_map.LoadTiles(g_screen);
 //======LoadPlayer========
 	//Image
 	MainObject p_player;
-	p_player.LoadImg("img//goku_right.png", g_screen);
+	p_player.LoadImg("img//runR.png", g_screen);
 	p_player.set_clip();
 	p_player.setScore(0);
 	//Heart icon
@@ -172,7 +172,7 @@ int main(int argc, char* argv[])
 	BossObject BossObj;
 	BossObj.LoadImg("img//boss_object.png", g_screen);
 	BossObj.set_clips();
-	int PosBoss = MAX_MAP_X * TILE_SIZE - SCREEN_WIDTH;
+	int PosBoss = MAX_MAP_X * TILE_SIZE - 400;
 	BossObj.set_x_pos(PosBoss);
 	BossObj.set_y_pos(20);
 	int boss_blood = 100;
@@ -509,7 +509,7 @@ int main(int argc, char* argv[])
 
 			}
 		}
-		int val = MAX_MAP_X * TILE_SIZE - (map_data.start_x_ + p_player.GetRect().x) - 750;
+		int val = MAX_MAP_X * TILE_SIZE - (map_data.start_x_ + p_player.GetRect().x) - 450;
 		if (val <= SCREEN_WIDTH && boss == true)
 		{
 			BossObj.ShowHP(g_screen, boss_blood);

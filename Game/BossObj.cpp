@@ -277,7 +277,7 @@ void BossObject::InitBullet(SDL_Renderer* screen)
 {
     BulletObject* p_bullet = new BulletObject();
     bool ret;
-    if (count_ % 8 != 0)
+    if (count_ % 4 != 0)
     {
         ret = p_bullet->LoadImg("img//boss_bullet.png", screen);
         if (ret)

@@ -21,11 +21,11 @@ bool BulletObject::LoadImgBullet(SDL_Renderer* des)
 	}
 	else if (bullet_type_ == KAME_BULLET_L)
 	{
-		ret = LoadImg("img//kameL.png", des);
+		ret = LoadImg("img//bulletL.png", des);
 	}
 	else if (bullet_type_ == KAME_BULLET_R)
 	{
-		ret = LoadImg("img//kameR.png", des);
+		ret = LoadImg("img//bulletR.png", des);
 	}
 	return ret;
 }
