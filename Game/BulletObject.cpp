@@ -5,7 +5,7 @@ BulletObject::BulletObject()
 	x_val_ = 0;
 	y_val_ = 0;
 	is_move_ = false;
-	bullet_type_ = KAME_BULLET_L;
+	bullet_type_ = MAIN_BULLET_L;
 
 }
 BulletObject::~BulletObject()
@@ -15,15 +15,15 @@ BulletObject::~BulletObject()
 bool BulletObject::LoadImgBullet(SDL_Renderer* des)
 {
 	bool ret = false;
-	if (bullet_type_ == LAZE_BULLET)
+	if (bullet_type_ == TANK_BULLET)
 	{
-		ret = LoadImg("img//laze_bullet.png", des);
+		ret = LoadImg("img//tank_bullet.png", des);
 	}
-	else if (bullet_type_ == KAME_BULLET_L)
+	else if (bullet_type_ == MAIN_BULLET_L)
 	{
 		ret = LoadImg("img//bulletL.png", des);
 	}
-	else if (bullet_type_ == KAME_BULLET_R)
+	else if (bullet_type_ == MAIN_BULLET_R)
 	{
 		ret = LoadImg("img//bulletR.png", des);
 	}

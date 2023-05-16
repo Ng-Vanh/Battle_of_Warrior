@@ -20,9 +20,9 @@ public:
 	};
 	enum BulletType
 	{
-		KAME_BULLET_L = 50,
-		KAME_BULLET_R = 52,
-		LAZE_BULLET = 51,
+		MAIN_BULLET_L = 50,
+		MAIN_BULLET_R = 52,
+		TANK_BULLET = 51,
 	};
 
 	void set_x_val(const int& xVal) { x_val_ = xVal; }

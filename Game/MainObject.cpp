@@ -161,11 +161,11 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* screen)
 
 			if (status_ == WALK_LEFT)
 			{
-				p_bullet->set_bullet_type(BulletObject::KAME_BULLET_L);
+				p_bullet->set_bullet_type(BulletObject::MAIN_BULLET_L);
 			}
 			else if (status_ = WALK_RIGHT)
 			{
-				p_bullet->set_bullet_type(BulletObject::KAME_BULLET_R);
+				p_bullet->set_bullet_type(BulletObject::MAIN_BULLET_R);
 			}
 
 			p_bullet->LoadImgBullet(screen);

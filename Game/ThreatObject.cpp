@@ -302,7 +302,7 @@ void ThreatObject::InitBullet(BulletObject* p_bullet, SDL_Renderer* screen)
 	int yp = y_pos_ - map_y_;
 	if (p_bullet != NULL)
 	{
-		p_bullet->set_bullet_type(BulletObject::LAZE_BULLET);
+		p_bullet->set_bullet_type(BulletObject::TANK_BULLET);
 		bool ret = p_bullet->LoadImgBullet(screen);
 		if (ret)
 		{
