@@ -8,7 +8,7 @@
 - Bạn sẽ sử dụng 4 phím cơ bản `a-w-s-d` để di chuyển, sử dụng chuột trái để bắn đạn tiêu diệt kẻ địch.
 ![example](Game/readme/tank.png) ![example](Game/readme/quai2.png)
 - Bạn cũng hãy cố gắng ăn thật nhiều `coin` xuất hiện trên bản đồ để gia tăng số điểm.![example](Game/readme/coin.png)
-
+- Tiêu diệt Boss để dành chiến thắng!!! ![example](Game/readme/boss.png)
 
 ## Cách compile
 1. clone repos: `git clone https://github.com/Ng-Vanh/Battle_of_Warrior.git`

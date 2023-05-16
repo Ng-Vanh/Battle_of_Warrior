@@ -90,7 +90,7 @@ static int showMenu()
 	scrRest[1].y = 0;
 
 	desRest[1].x = 870;
-	desRest[1].y = 330;
+	desRest[1].y = 350;
 
 	desRest[1].w = scrRest[1].w;
 	desRest[1].h = scrRest[1].h;

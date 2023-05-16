@@ -114,7 +114,7 @@ std::vector<ThreatObject*> MakeThreatList()
 		ThreatObject* p_threat = (threats_objs + i);
 		if (p_threat != NULL)
 		{
-			p_threat->LoadImg("img//threat_level.png", g_screen);
+			p_threat->LoadImg("img//tank.png", g_screen);
 			p_threat->set_clips();
 			p_threat->set_x_pos(shot_threats_pos[i]);
 			p_threat->set_y_pos(250);
@@ -180,7 +180,7 @@ int main(int argc, char* argv[])
 
 	//Khoi tao vu no
 	ExplosionObj exp_threat;
-	bool tRet = exp_threat.LoadImg("img//exp3.png", g_screen);
+	bool tRet = exp_threat.LoadImg("img//exp.png", g_screen);
 	if (!tRet)
 	{
 		return false;
@@ -189,7 +189,7 @@ int main(int argc, char* argv[])
 		exp_threat.set_clip();
 	}
 	ExplosionObj exp_player;
-	bool epRet = exp_player.LoadImg("img//exp33.png", g_screen);
+	bool epRet = exp_player.LoadImg("img//lasthit.png", g_screen);
 	if (!epRet)
 	{
 		return false;
@@ -198,7 +198,7 @@ int main(int argc, char* argv[])
 		exp_player.set_clip();
 	}
 	ExplosionObj exp_boss;
-	bool tRetBoss = exp_boss.LoadImg("Img//boss_bullet.png", g_screen);
+	bool tRetBoss = exp_boss.LoadImg("img//boss_bullet.png", g_screen);
 	if (!tRetBoss)
 	{
 		return false;
@@ -261,7 +261,7 @@ int main(int argc, char* argv[])
 		}
 		if (heart == 0)
 		{
-			p_player.RenderLoss(g_screen);
+			endGame.RenderLoss(g_screen);
 
 		}
 //==End: Init Player=====================================

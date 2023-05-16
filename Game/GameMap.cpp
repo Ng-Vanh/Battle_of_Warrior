@@ -49,7 +49,7 @@ void GameMap::LoadMap(char* name)
 }
 void GameMap::LoadTiles(SDL_Renderer* screen)
 {
-		 for (int i = 0; i < MAX_TILES; i++)
+	for (int i = 0; i < MAX_TILES; i++)
     {
         std::string file_img = "map/" + std::to_string(i) + ".png";
         if (std::ifstream(file_img))
