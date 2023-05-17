@@ -252,18 +252,23 @@ int main(int argc, char* argv[])
 		if (p_player.GetRect().y > 630)
 		{
 			heart--;
-			p_player.SetRect(0, 0);
-			p_player.set_comeback_time(40);
-			SDL_Delay(600);
-			player_heart.Decrease();
-			player_heart.Render(g_screen);
-			continue;
+			if (heart == 0)
+			{
+				endGame.RenderLoss(g_screen);
+				close();
+				SDL_Quit();
+				is_quit = true;
+			}else
+			{
+				p_player.SetRect(0, 0);
+				p_player.set_comeback_time(40);
+				SDL_Delay(600);
+				player_heart.Decrease();
+				player_heart.Render(g_screen);
+				continue;
+			}
 		}
-		if (heart == 0)
-		{
-			endGame.RenderLoss(g_screen);
-
-		}
+		
 //==End: Init Player=====================================
 		//Show Map
 		game_map.setMap(map_data);
