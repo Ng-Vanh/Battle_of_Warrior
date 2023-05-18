@@ -330,7 +330,7 @@ int main(int argc, char* argv[])
 						exp_threat.set_frame(ex);
 						exp_threat.SetRect(x_pos, y_pos);
 						exp_threat.Show(g_screen);
-						SDL_RenderPresent(g_screen);
+						//SDL_RenderPresent(g_screen);
 					}
 
 					heart--;
@@ -390,7 +390,7 @@ int main(int argc, char* argv[])
 								exp_threat.set_frame(ex);
 								exp_threat.SetRect(x_pos, y_pos);
 								exp_threat.Show(g_screen);
-								SDL_RenderPresent(g_screen);
+								//SDL_RenderPresent(g_screen);
 							}
 							p_player.RemoveBullet(r);
 							obj_threat->Free();
@@ -439,7 +439,7 @@ int main(int argc, char* argv[])
 				exp_player.set_frame(ex);
 				exp_player.SetRect(x_pos, y_pos);
 				exp_player.Show(g_screen);
-				SDL_RenderPresent(g_screen);
+				//SDL_RenderPresent(g_screen);
 			}
 			heart--;
 
@@ -491,7 +491,7 @@ int main(int argc, char* argv[])
 						exp_boss.set_frame(ex);
 						exp_boss.SetRect(x_pos, y_pos);
 						exp_boss.Show(g_screen);
-						SDL_RenderPresent(g_screen);
+						//SDL_RenderPresent(g_screen);
 					}
 
 					boss_blood -= 2;

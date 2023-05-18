@@ -65,7 +65,7 @@ void BaseObject::RenderLoss(SDL_Renderer* render)
 
 	SDL_RenderCopy(render, newTexture, NULL, &picLoss);
 	SDL_RenderPresent(render);
-	SDL_Delay(400);
+	SDL_Delay(1000);
 }
 void BaseObject::RenderWin(SDL_Renderer* render)
 {
@@ -82,5 +82,5 @@ void BaseObject::RenderWin(SDL_Renderer* render)
 
 	SDL_RenderCopy(render, newTexture, NULL, &picWin);
 	SDL_RenderPresent(render);
-	SDL_Delay(400);
+	SDL_Delay(1000);
 }
